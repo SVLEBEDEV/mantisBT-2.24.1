@@ -1,5 +1,6 @@
 from time import sleep
 from model.project import Project
+import random
 
 
 class ProjectHelper:
@@ -39,7 +40,15 @@ class ProjectHelper:
             project_list.append(Project(name=name, description=description))
         return project_list
 
+    def open_first_project(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//div[@id='main-container']/div[2]/div[2]/div/div/div[2]/div[2]/div/div[2]/table/tbody/tr/td/a").click()
 
+    def delete_first_project(self):
+        wd = self.app.wd
+        self.open_first_project()
+        wd.find_element_by_css_selector('input[value="Удалить проект"]').click()
+        wd.find_element_by_css_selector('input[value="Удалить проект"]').click()
 
 
 
