@@ -13,5 +13,7 @@ def test_del_project(app):
     old_project_list = app.project.get_project_list()
     app.project.delete_first_project()
     new_project_list = app.project.get_project_list()
-    old_project_list.remove(old_project_list[0])
+    project = old_project_list[0]
+    old_project_list.remove(project)
     assert sorted(old_project_list, key=Project.sorted_by_name) == sorted(new_project_list, key=Project.sorted_by_name)
+    assert app.soap.project_id('administrator', 'root', project) == 0
