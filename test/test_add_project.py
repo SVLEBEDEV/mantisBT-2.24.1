@@ -8,9 +8,8 @@ def test_add_project(app):
     description = 'description' + str(random.randrange(0,50))
     project = Project(name=name, description=description)
     #Steps test keys
-    old_project_list = app.project.get_project_list()
+    old_project_list = app.soap.get_projects('administrator', 'root')
     app.project.add_new_project(project)
     old_project_list.append(project)
-    new_project_list = app.project.get_project_list()
-    assert sorted(old_project_list, key=Project.sorted_by_name) == sorted(new_project_list, key=Project.sorted_by_name)
-    assert app.soap.project_id('administrator', 'root', project) != 0
+    new_project_list = app.soap.get_projects('administrator', 'root')
+    assert sorted(old_project_list, key=Project.sorted_by_id) == sorted(new_project_list, key=Project.sorted_by_id)
