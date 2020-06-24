@@ -18,12 +18,12 @@ class Application:
         self.wd.implicitly_wait(1)
         self.session = SessionHelper(self)
         self.project = ProjectHelper(self)
-        self.soap = SoapHelper(self)
+        self.soap = SoapHelper(self, baseURL)
         self.baseURL = baseURL
 
     def open_home_page(self):
         wd = self.wd
-        wd.get(self.baseURL)
+        wd.get(self.baseURL + 'my_view_page.php')
 
     def destroy(self):
         self.wd.quit()
